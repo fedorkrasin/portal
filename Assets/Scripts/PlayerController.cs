@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
         var vertical = _speed * Input.GetAxis("Vertical");
         var horizontal = _speed * Input.GetAxis("Horizontal");
         
-        transform.position += Vector3.forward * vertical * Time.deltaTime;
-        transform.position += Vector3.right * horizontal * Time.deltaTime;
+        transform.position += Vector3.back * vertical * Time.deltaTime;
+        transform.position += Vector3.left * horizontal * Time.deltaTime;
     }
 }
