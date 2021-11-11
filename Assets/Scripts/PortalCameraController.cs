@@ -7,6 +7,7 @@ public class PortalCameraController : MonoBehaviour
 {
     [SerializeField] private PortalCameraController _otherPortal;
     [SerializeField] private Camera _portalView;
+    [SerializeField] private MeshRenderer _mesh;
 
     private void Start()
     {
@@ -21,13 +22,14 @@ public class PortalCameraController : MonoBehaviour
     private void CreatePortalTexture()
     {
         _otherPortal._portalView.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
-        GetComponent<MeshRenderer>().sharedMaterial.mainTexture = _otherPortal._portalView.targetTexture;
+        _mesh.sharedMaterial.mainTexture = _otherPortal._portalView.targetTexture;
     }
 
     private void SetPortalView()
     {
         var playerPosition = _otherPortal.transform.worldToLocalMatrix.MultiplyPoint3x4(Camera.main.transform.position);
-        _portalView.transform.localPosition = -playerPosition;
+        playerPosition = new Vector3(-playerPosition.x, playerPosition.y, -playerPosition.z);
+        _portalView.transform.localPosition = playerPosition;
 
         var difference = transform.rotation *
                          Quaternion.Inverse(_otherPortal.transform.rotation * Quaternion.Euler(0, 180, 0));
