@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private float _rotationSpeed;
-
-    private Vector2 _rotation;
+    [SerializeField] private float _horizontalRotationSpeed;
+    [SerializeField] private float _verticalRotationSpeed;
     
     private void Update()
     {
@@ -27,8 +26,8 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate()
     {
-        _rotation.x += Input.GetAxis("Mouse X") * _rotationSpeed;
-        _rotation.y += Input.GetAxis("Mouse Y") * _rotationSpeed;
-        transform.localRotation = Quaternion.Euler(-_rotation.y, _rotation.x, 0);
+        var deltaX = Input.GetAxis("Mouse X") * _verticalRotationSpeed;
+        var deltaY = Input.GetAxis("Mouse Y") * _horizontalRotationSpeed;;
+        transform.localEulerAngles += new Vector3(-deltaY, deltaX, 0);
     }
 }

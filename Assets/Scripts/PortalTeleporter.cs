@@ -9,20 +9,32 @@ public class PortalTeleporter : MonoBehaviour
 
     private void Teleport(Transform obj)
     {
-        var localPosition = transform.worldToLocalMatrix.MultiplyPoint3x4(obj.position);
-        localPosition = new Vector3(-localPosition.x, localPosition.y, -localPosition.z);
-        obj.position = _otherPortal.transform.localToWorldMatrix.MultiplyPoint3x4(localPosition);
+        Move(obj);
+        Rotate(obj);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("trigger");
-        
         var zPos = transform.worldToLocalMatrix.MultiplyPoint3x4(other.transform.position).z;
 
         if (zPos < 0)
         {
             Teleport(other.transform);
         }
+    }
+    
+    private void Move(Transform obj)
+    {
+        var localPosition = transform.worldToLocalMatrix.MultiplyPoint3x4(obj.position);
+        localPosition = new Vector3(-localPosition.x, localPosition.y, -localPosition.z);
+        obj.position = _otherPortal.transform.localToWorldMatrix.MultiplyPoint3x4(localPosition);
+    }
+
+    private void Rotate(Transform obj)
+    {
+        var difference = _otherPortal.transform.rotation *
+                         Quaternion.Inverse(transform.rotation * Quaternion.Euler(0, 180, 0));
+        
+        obj.rotation = difference * obj.rotation;
     }
 }
