@@ -15,7 +15,7 @@ public class PortalCameraController : MonoBehaviour
 
     private void SetPortalView()
     {
-        var playerPosition = _otherPortal.transform.worldToLocalMatrix.MultiplyPoint(Camera.main.transform.position);
+        var playerPosition = _otherPortal.transform.worldToLocalMatrix.MultiplyPoint3x4(Camera.main.transform.position);
         _portalView.transform.localPosition = -playerPosition;
     }
 }
