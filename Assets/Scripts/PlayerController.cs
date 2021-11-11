@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
         var destinationVector = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
         transform.position += destinationVector * vertical * Time.deltaTime;
-        transform.position += Vector3.left * horizontal * Time.deltaTime;
+        transform.position += transform.right * horizontal * Time.deltaTime;
     }
 
     private void Rotate()

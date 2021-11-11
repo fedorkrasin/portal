@@ -21,5 +21,7 @@ public class PortalCameraController : MonoBehaviour
         var difference = transform.rotation *
                          Quaternion.Inverse(_otherPortal.transform.rotation * Quaternion.Euler(0, 180, 0));
         _portalView.transform.rotation = difference * Camera.main.transform.rotation;
+
+        _portalView.nearClipPlane = playerPosition.magnitude;
     }
 }
