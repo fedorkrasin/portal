@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Portal
   - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerTeleporting
+  - TeleportingGround
   - 
   - 
   - 

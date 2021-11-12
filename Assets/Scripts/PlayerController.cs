@@ -7,11 +7,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _horizontalRotationSpeed;
     [SerializeField] private float _verticalRotationSpeed;
+    [SerializeField] private float _jumpPower;
     
     private void Update()
     {
         Move();
         Rotate();
+        Jump();
     }
 
     private void Move()
@@ -29,5 +31,13 @@ public class PlayerController : MonoBehaviour
         var deltaX = Input.GetAxis("Mouse X") * _verticalRotationSpeed;
         var deltaY = Input.GetAxis("Mouse Y") * _horizontalRotationSpeed;;
         transform.localEulerAngles += new Vector3(-deltaY, deltaX, 0);
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.up * _jumpPower;
+        }
     }
 }

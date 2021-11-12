@@ -37,4 +37,14 @@ public class PortalTeleporter : MonoBehaviour
         
         obj.rotation = difference * obj.rotation;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.layer = 9;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.gameObject.layer = 8;
+    }
 }
